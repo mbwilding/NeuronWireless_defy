@@ -1,5 +1,5 @@
 /*
- * kaleidoscope::plugin::DefyFirmwareVersion -- Tell the firmware version via Focus
+ * kaleidoscope::plugin::FirmwareVersion -- Tell the firmware version via Focus
  *
  * Copyright (C) 2020  Dygma Lab S.L.
  *
@@ -28,7 +28,6 @@ namespace plugin
 class FirmwareVersion : public Plugin
 {
   public:
-    bool need_update_;
     EventHandlerResult onFocusEvent(const char *command);
 };
 

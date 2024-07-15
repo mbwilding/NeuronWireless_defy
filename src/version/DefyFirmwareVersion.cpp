@@ -1,5 +1,5 @@
 /*
- * kaleidoscope::plugin::DefyFirmwareVersion -- Tell the firmware version via Focus
+ * kaleidoscope::plugin::FirmwareVersion -- Tell the firmware version via Focus
  *
  * Copyright (C) 2020  Dygma Lab S.L.
  *
@@ -21,8 +21,8 @@
 #include "Kaleidoscope.h"
 #include "nrf_log.h"
 
-#ifndef Defy_FIRMWARE_VERSION
-#define Defy_FIRMWARE_VERSION "v0.0.0"
+#ifndef DEFY_FIRMWARE_VERSION
+    #define DEFY_FIRMWARE_VERSION "v0.0.0"
 #endif
 
 namespace kaleidoscope
@@ -40,7 +40,7 @@ EventHandlerResult FirmwareVersion::onFocusEvent(const char *command)
     NRF_LOG_DEBUG("read request: version");
 
     char cstr[70];
-    strcpy(cstr, Defy_FIRMWARE_VERSION);
+    strcpy(cstr, DEFY_FIRMWARE_VERSION);
     ::Focus.sendRaw<char *>(cstr);
 
     return EventHandlerResult::EVENT_CONSUMED;

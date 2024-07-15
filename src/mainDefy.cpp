@@ -54,6 +54,7 @@ extern "C"
 #include "Kaleidoscope.h"
 // #include "RaiseIdleLEDs.h"
 #include "DefyFirmwareVersion.h"
+
 #include "kaleidoscope/device/dygma/defy_wireless/Focus.h"
 // #include "kaleidoscope/device/dygma/defy_wireless/SideFlash.h"
 
