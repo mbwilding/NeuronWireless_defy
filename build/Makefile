@@ -104,7 +104,6 @@ LFLAGS += $(COMMONFLAGS) -L$(LIBDIR) -Wl,--gc-sections
 LFLAGS += -specs=nano.specs -specs=nosys.specs -lc -lnosys -lm
 LFLAGS += -Wl,-T./init/device/$(TARGET_MCU_DIR_NAME)/flash.ld
 
-
 #-------------------------------------------------------------------------------
 # Base defines
 #-------------------------------------------------------------------------------
@@ -139,6 +138,12 @@ DEFINES += -DAPP_TIMER_V2_RTC1_ENABLED
 DEFINES += -DNRFX_PPI_ENABLED=1
 DEFINES += -DNRF52_ARCH
 
+#-------------------------------------------------------------------------------
+# Main firmware defines
+#-------------------------------------------------------------------------------
+# Flag to select which keyboard to compile.
+DEFINES += -DCOMPILE_DEFY_KEYBOARD=0
+DEFINES += -DCOMPILE_RAISE2_KEYBOARD=1
 
 #-------------------------------------------------------------------------------
 # RF Host Device
