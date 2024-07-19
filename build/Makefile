@@ -139,13 +139,6 @@ DEFINES += -DNRFX_PPI_ENABLED=1
 DEFINES += -DNRF52_ARCH
 
 #-------------------------------------------------------------------------------
-# Main firmware defines
-#-------------------------------------------------------------------------------
-# Flag to select which keyboard to compile.
-DEFINES += -DCOMPILE_DEFY_KEYBOARD=0
-DEFINES += -DCOMPILE_RAISE2_KEYBOARD=1
-
-#-------------------------------------------------------------------------------
 # RF Host Device
 #-------------------------------------------------------------------------------
 
@@ -247,8 +240,9 @@ INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/hal/
 INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/mdk/
 
 #-------------------------------------------------------------------------------
-# C sources
+# C/C++ sources
 #-------------------------------------------------------------------------------
+
 # Application project
 SRCSC += $(wildcard $(APP_ROOT_DIR)/*.c)
 SRCSC += $(wildcard $(APP_ROOT_DIR)/src/*.c)
@@ -366,6 +360,24 @@ SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope_internal/LEDModeManager.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Communications/src/device/defyN2/CommunicationsN2.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Communications/src/Communications_protocol_rf.cpp
 
+# Keyboardio HID
+INCDIR += -I$(KEYBOARDIO_HID_ROOT_DIR)/src/
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/ConsumerControl.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/Keyboard.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/Mouse.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/RawHID.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/SystemControl.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/hidDefy.cpp
+SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/HIDReportObserver.cpp
+
+#-------------------------------------------------------------------------------
+# Main firmware defines
+#-------------------------------------------------------------------------------
+
+# Select which keyboard to compile.
+DEFINES += -DCOMPILE_DEFY_KEYBOARD=0
+DEFINES += -DCOMPILE_RAISE2_KEYBOARD=1
+
 ifdef FIRMWARE_VERSION
 	DEFINES += -DFIRMWARE_VERSION=\"${FIRMWARE_VERSION}\"
 endif
@@ -377,17 +389,6 @@ DEFINES += -DUSB_PRODUCT=\"DEFY\"
 DEFINES += -DKALEIDOSCOPE_HARDWARE_H=\"kaleidoscope/device/dygma/Defy_wireless.h\"
 DEFINES += -DKALEIDOSCOPE_LED_CONTROL_H=\<kaleidoscope/plugin/LEDControlDefy.h\>
 DEFINES += -DEEPROM_EMULATION_SIZE=8192
-
-
-# Keyboardio HID
-INCDIR += -I$(KEYBOARDIO_HID_ROOT_DIR)/src/
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/ConsumerControl.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/Keyboard.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/Mouse.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/RawHID.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/SystemControl.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/hidDefy.cpp
-SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/HIDReportObserver.cpp
 
 #-------------------------------------------------------------------------------
 # Rules
