@@ -174,6 +174,7 @@ INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/rf_host_device/includes/middleware/
 INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/rf_host_device/includes/rf_gateway/
 INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/rf_host_device/includes/rf_protocol/
 INCDIR += -I$(LIB_ROOT_DIR)/Spi_slave/
+INCDIR += -I$(LIB_ROOT_DIR)/Spi_slave/link/
 INCDIR += -I$(LIB_ROOT_DIR)/Status_leds/
 INCDIR += -I$(LIB_ROOT_DIR)/Time_counter/
 INCDIR += -I$(LIB_ROOT_DIR)/Watchdog_timer/
@@ -188,6 +189,14 @@ INCDIR += -I$(LIB_ROOT_DIR)/RF_manager/
 INCDIR += -I$(LIB_ROOT_DIR)/utils/Do_once/
 INCDIR += -I$(LIB_ROOT_DIR)/utils/Run_task_once/
 INCDIR += -I$(LIB_ROOT_DIR)/utils/Timer/
+
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/hal/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/hal/mcu/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/hal/mcu/nrf52/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/middleware/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/middleware/halsep/
+INCDIR += -I$(LIB_ROOT_DIR)/NRf_platform/middleware/memory/
 
 # Kaleidoscope
 INCDIR += -I$(KALEIDOSCOPE_ROOT_DIR)/src/
@@ -255,7 +264,16 @@ SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/version/*.cpp)
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/Ble_composite_dev.c
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/ble_hid_service.c
 SRCSC += $(LIB_ROOT_DIR)/rf_host_device/rf_host_device_api.c
+SRCSC += $(LIB_ROOT_DIR)/Spi_slave/link/spi_link_slave.c
 SRCSC += $(LIB_ROOT_DIR)/Time_counter/Time_counter.c
+
+SRCSC += $(LIB_ROOT_DIR)/NRf_platform/hal/mcu/nrf52/hal_ll_nrf528xx_mutex.c
+SRCSC += $(LIB_ROOT_DIR)/NRf_platform/hal/mcu/nrf52/hal_ll_nrf528xx_spi.c
+
+SRCSC += $(LIB_ROOT_DIR)/NRf_platform/middleware/halsep/hal_mcu_mutex.c
+SRCSC += $(LIB_ROOT_DIR)/NRf_platform/middleware/halsep/hal_mcu_spi.c
+SRCSC += $(LIB_ROOT_DIR)/NRf_platform/middleware/memory/heap.c
+#SRCSC += $(LIB_ROOT_DIR)/NRf_platform/middleware/drivers/spi/link/spi_link_slave.c
 
 SRCSCXX += $(LIB_ROOT_DIR)/Fifo_buffer/Fifo_buffer.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/EEPROM/EEPROM.cpp
