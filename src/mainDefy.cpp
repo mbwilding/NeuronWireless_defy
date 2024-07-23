@@ -37,8 +37,6 @@ extern "C"
 #include "EEPROM.h"
 #include "Watchdog_timer.h"
 #include "common.h"
-// BLE
-#include "Ble_composite_dev.h"
 
 // Kaleidoscope
 #include "Kaleidoscope-Colormap.h"
@@ -53,7 +51,12 @@ extern "C"
 #include "Kaleidoscope-USB-Quirks.h"
 #include "Kaleidoscope.h"
 // #include "RaiseIdleLEDs.h"
-#include "DefyFirmwareVersion.h"
+
+#if COMPILE_DEFY_KEYBOARD
+    #include "DefyFirmwareVersion.h"
+#elif COMPILE_RAISE2_KEYBOARD
+    #include "Raise2FirmwareVersion.h"
+#endif
 
 #include "kaleidoscope/device/dygma/defy_wireless/Focus.h"
 // #include "kaleidoscope/device/dygma/defy_wireless/SideFlash.h"
@@ -78,6 +81,7 @@ extern "C"
 // #include "DefaultColormap.h"
 
 #include "Battery.h"
+#include "Ble_composite_dev.h"
 #include "Ble_manager.h"
 #include "Communications.h"
 #include "Radio_manager.h"
