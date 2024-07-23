@@ -168,6 +168,7 @@ INCDIR += -I$(LIB_ROOT_DIR)/Fifo_buffer/
 INCDIR += -I$(LIB_ROOT_DIR)/EEPROM/
 INCDIR += -I$(LIB_ROOT_DIR)/NeuronLedLibrary/
 INCDIR += -I$(LIB_ROOT_DIR)/NeuronLedLibrary/LedModeSerializable/
+INCDIR += -I$(LIB_ROOT_DIR)/NeuronLedLibrary/LedModeSerializable/src/
 INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/
 INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/rf_host_device/includes/
 INCDIR += -I$(LIB_ROOT_DIR)/rf_host_device/rf_host_device/includes/middleware/
