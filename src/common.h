@@ -30,6 +30,7 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
+
 #include "stdint.h"
 
 // clang-format off
@@ -143,5 +144,6 @@
     /* Buttons and LEDs are LOW activated in the debelopment board. */
     #define BTN_SYSTEM_OFF BTN1  /* Set the request for system OFF. */
 #endif
+
 
 #endif  /* __COMMON_H__ */
