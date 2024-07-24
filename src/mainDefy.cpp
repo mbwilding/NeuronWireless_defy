@@ -54,12 +54,13 @@ extern "C"
 
 #if COMPILE_DEFY_KEYBOARD
     #include "DefyFirmwareVersion.h"
+    #include "kaleidoscope/device/dygma/defy_wireless/Focus.h"
+// #include "kaleidoscope/device/dygma/defy_wireless/SideFlash.h"
 #elif COMPILE_RAISE2_KEYBOARD
     #include "Raise2FirmwareVersion.h"
+    #include "kaleidoscope/device/dygma/raise2/Focus.h"
+// #include "kaleidoscope/device/dygma/raise2/SideFlash.h"
 #endif
-
-#include "kaleidoscope/device/dygma/defy_wireless/Focus.h"
-// #include "kaleidoscope/device/dygma/defy_wireless/SideFlash.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -196,6 +197,7 @@ namespace std
         while (1);
     };
 }
+// clang-format on
 
 // Kaleidoscope
 enum
@@ -209,45 +211,89 @@ enum
     This comments temporarily turns off astyle's indent enforcement so we can make
     the keymaps actually resemble the physical key layout better
 */
-KEYMAPS(
-[QWERTY] = KEYMAP_STACKED
-(
-    /* Left Side */
-    Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,
-    Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T, Consumer_VolumeIncrement,
-    Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G, Consumer_VolumeDecrement,
-    Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B,
-    Key_LeftControl, Key_LeftGui, Key_Backspace, Key_Delete,
-    Key_LeftShift, Key_LeftAlt, Key_Enter, Key_Space,
+// clang-format off
+#if COMPILE_DEFY_KEYBOARD
+    KEYMAPS
+    (
+        [QWERTY] = KEYMAP_STACKED
+        (
+            /* Left Side */
+            Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,
+            Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T, Consumer_VolumeIncrement,
+            Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G, Consumer_VolumeDecrement,
+            Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B,
+            Key_LeftControl, Key_LeftGui, Key_Backspace, Key_Delete,
+            Key_LeftShift, Key_LeftAlt, Key_Enter, Key_Space,
 
-    /* Right Side */
-    Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace,
-    Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket,
-    Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_RightShift,
-    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
-    Key_LEDEffectNext, Key_Home, Key_UpArrow, Key_End,
-    Key_RightArrow, Key_DownArrow, Key_LeftArrow, Key_Enter
-),
+            /* Right Side */
+            Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace,
+            Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket,
+            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_RightShift,
+            Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
+            Key_LEDEffectNext, Key_Home, Key_UpArrow, Key_End,
+            Key_RightArrow, Key_DownArrow, Key_LeftArrow, Key_Enter
+        ),
 
-[NUMPAD] = KEYMAP_STACKED
-(
-    /* Left Side */
-    Key_Escape, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F6,
-    Key_Tab, Key_NoKey, Key_UpArrow, Key_NoKey, Key_NoKey, Key_NoKey, Key_NoKey,
-    Key_CapsLock, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_NoKey, Key_NoKey, Key_NoKey,
-    Key_LeftShift, Key_Backslash, Key_NoKey, Key_NoKey, Key_NoKey, Key_NoKey,
-    Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space,
-    Key_Space, Key_Backspace, Key_Enter, Key_Delete,
+        [NUMPAD] = KEYMAP_STACKED
+        (
+            /* Left Side */
+            Key_Escape, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F6,
+            Key_Tab, Key_NoKey, Key_UpArrow, Key_NoKey, Key_NoKey, Key_NoKey, Key_NoKey,
+            Key_CapsLock, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_NoKey, Key_NoKey, Key_NoKey,
+            Key_LeftShift, Key_Backslash, Key_NoKey, Key_NoKey, Key_NoKey, Key_NoKey,
+            Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space,
+            Key_Space, Key_Backspace, Key_Enter, Key_Delete,
 
-    /* Right Side */
-    Key_F7, Key_F8, Key_F9, Key_F10, Key_F11, Key_F12, Key_Backspace,
-    Key_KeypadSubtract, Key_7, Key_8, Key_9, Key_KeypadDivide, Key_NoKey, Key_Enter,
-    Key_KeypadAdd, Key_4, Key_5, Key_6, Key_KeypadMultiply, Key_NoKey, Key_Backslash,
-    Key_KeypadDot, Key_1, Key_2, Key_3, Key_UpArrow, Key_RightShift,
-    Key_0, Key_Space, Key_LeftArrow, Key_DownArrow,
-    Key_RightArrow, Key_RightControl, Key_Delete, MoveToLayer(QWERTY)
-)
-);
+            /* Right Side */
+            Key_F7, Key_F8, Key_F9, Key_F10, Key_F11, Key_F12, Key_Backspace,
+            Key_KeypadSubtract, Key_7, Key_8, Key_9, Key_KeypadDivide, Key_NoKey, Key_Enter,
+            Key_KeypadAdd, Key_4, Key_5, Key_6, Key_KeypadMultiply, Key_NoKey, Key_Backslash,
+            Key_KeypadDot, Key_1, Key_2, Key_3, Key_UpArrow, Key_RightShift,
+            Key_0, Key_Space, Key_LeftArrow, Key_DownArrow,
+            Key_RightArrow, Key_RightControl, Key_Delete, MoveToLayer(QWERTY)
+        )
+    );
+#elif COMPILE_RAISE2_KEYBOARD
+    KEYMAPS
+    (
+        [QWERTY] = KEYMAP_STACKED
+        (
+                /* Left Side */
+                Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,
+                Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,
+                Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G,
+                Key_LeftShift, Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B,
+                Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space,
+                                                        Key_Backspace,Key_LEDEffectNext,
+                /* Right Side */
+                Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace,
+                Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter,
+                Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Backslash,
+                Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
+                Key_Space, Key_Space, Key_LeftArrow, Key_RightArrow, Key_UpArrow, Key_DownArrow,
+                Key_LEDEffectNext, Key_Delete
+        ),
+
+        [NUMPAD] = KEYMAP_STACKED
+        (
+                /* Left Side */
+                Key_Escape, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F6,
+                Key_Tab, XXX, Key_UpArrow, XXX, XXX, XXX,
+                Key_CapsLock, Key_LeftArrow, Key_DownArrow, Key_RightArrow, XXX, XXX,
+                Key_LeftShift, Key_Backslash, XXX, XXX, XXX, XXX, XXX,
+                Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space,
+                Key_Backspace, Key_Enter,
+
+                /* Right Side */
+                Key_F7, Key_F8, Key_F9, Key_F10, Key_F11, Key_F12, Key_Backspace,
+                Key_7, Key_8, Key_9, Key_KeypadDivide,Key_KeypadSubtract, XXX, XXX, Key_Enter,
+                Key_KeypadAdd, Key_4, Key_5, Key_6, Key_KeypadMultiply, XXX, Key_Backslash,
+                Key_KeypadDot, Key_1, Key_2, Key_3, Key_UpArrow, Key_RightShift,
+                Key_0, Key_Space, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_RightControl,
+                MoveToLayer(QWERTY), Key_Delete
+        )
+    );
+#endif
 /* Re-enable astyle's indent enforcement */
 // clang-format on
 
@@ -332,19 +378,37 @@ static kaleidoscope::plugin::LEDBatteryStatusDefy batteryStatus{};
 static kaleidoscope::plugin::LEDStalkerDefy stalkerDefy{};
 
 // clang-format off
-KALEIDOSCOPE_INIT_PLUGINS(
-FirmwareVersion, EEPROMSettings,
-EEPROMKeymap, FocusSettingsCommand, FocusEEPROMCommand, Upgrade, DynamicSuperKeys,
-LEDControl, FocusLEDCommand,
-LEDPaletteThemeDefy, ColormapEffectDefy,
-LEDRainbowWaveEffectDefy, LEDRainbowEffectDefy, stalkerDefy, solidRedDefy,
-solidGreenDefy, solidBlueDefy, solidWhiteDefy, solidBlackDefy, batteryStatus, ledBluetoothPairingDefy,
-IdleLEDsDefy, PersistentIdleDefyLEDs, DefyFocus, Qukeys, DynamicMacros,
-/*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
-HostPowerManagement, Battery,
-/*BLE*/
-RadioManager, BleManager
-);
+#if COMPILE_DEFY_KEYBOARD
+    KALEIDOSCOPE_INIT_PLUGINS
+    (
+        FirmwareVersion, EEPROMSettings,
+        EEPROMKeymap, FocusSettingsCommand, FocusEEPROMCommand, Upgrade, DynamicSuperKeys,
+        LEDControl, FocusLEDCommand,
+        LEDPaletteThemeDefy, ColormapEffectDefy,
+        LEDRainbowWaveEffectDefy, LEDRainbowEffectDefy, stalkerDefy, solidRedDefy,
+        solidGreenDefy, solidBlueDefy, solidWhiteDefy, solidBlackDefy, batteryStatus, ledBluetoothPairingDefy,
+        IdleLEDsDefy, PersistentIdleDefyLEDs, DefyFocus, Qukeys, DynamicMacros,
+        /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
+        HostPowerManagement, Battery,
+        /*BLE*/
+        RadioManager, BleManager
+    );
+#elif COMPILE_RAISE2_KEYBOARD
+    KALEIDOSCOPE_INIT_PLUGINS
+    (
+        EEPROMSettings,
+        EEPROMKeymap,FirmwareVersion, FocusSettingsCommand, FocusEEPROMCommand, Upgrade,DynamicSuperKeys,
+        LEDControl, FocusLEDCommand,
+        LEDPaletteThemeDefy, ColormapEffectDefy,
+        LEDRainbowWaveEffectDefy, LEDRainbowEffectDefy, stalkerDefy, solidRedDefy,
+        solidGreenDefy, solidBlueDefy, solidWhiteDefy, solidBlackDefy, batteryStatus,ledBluetoothPairingDefy,
+        IdleLEDsDefy,PersistentIdleDefyLEDs, Raise2Focus, Qukeys, DynamicMacros,
+        /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
+        HostPowerManagement,Battery,
+        /*BLE*/
+        RadioManager, BleManager
+    );
+#endif
 // clang-format on
 // End Kaleidoscope
 
