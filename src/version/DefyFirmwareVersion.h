@@ -31,7 +31,7 @@ class FirmwareVersion : public Plugin
     EventHandlerResult onFocusEvent(const char *command);
 };
 
-} // namespace plugin
-} // namespace kaleidoscope
+}   // namespace plugin
+}   // namespace kaleidoscope
 
 extern kaleidoscope::plugin::FirmwareVersion FirmwareVersion;

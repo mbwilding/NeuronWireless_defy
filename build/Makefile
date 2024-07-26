@@ -1,8 +1,16 @@
+# Select which keyboard to compile.
+_COMPILE_DEFY_KEYBOARD=1
+_COMPILE_RAISE2_KEYBOARD=0
+
 #-------------------------------------------------------------------------------
 # Application name (project name)
 #-------------------------------------------------------------------------------
 
-APP_NAME = NeuronWireless_defy
+ifeq ($(_COMPILE_DEFY_KEYBOARD),1)
+	APP_NAME = NeuronWireless_defy
+else ifeq ($(_COMPILE_RAISE2_KEYBOARD),1)
+	APP_NAME = NeuronWireless_raise2
+endif
 
 #-------------------------------------------------------------------------------
 # Common, platform and project root directories
@@ -104,7 +112,6 @@ LFLAGS += $(COMMONFLAGS) -L$(LIBDIR) -Wl,--gc-sections
 LFLAGS += -specs=nano.specs -specs=nosys.specs -lc -lnosys -lm
 LFLAGS += -Wl,-T./init/device/$(TARGET_MCU_DIR_NAME)/flash.ld
 
-
 #-------------------------------------------------------------------------------
 # Base defines
 #-------------------------------------------------------------------------------
@@ -138,7 +145,6 @@ DEFINES += -DAPP_TIMER_V2_RTC1_ENABLED
 # Others
 DEFINES += -DNRFX_PPI_ENABLED=1
 DEFINES += -DNRF52_ARCH
-
 
 #-------------------------------------------------------------------------------
 # RF Host Device
@@ -205,7 +211,6 @@ INCDIR += -I$(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/
 INCDIR += -I$(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/
 
 # SDK
-
 INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/components/ble/ble_advertising/
 INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/components/ble/ble_dtm/
 INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/components/ble/ble_link_ctx_manager/
@@ -252,15 +257,21 @@ INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/hal/
 INCDIR += -I$(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/mdk/
 
 #-------------------------------------------------------------------------------
-# C sources
+# C/C++ sources
 #-------------------------------------------------------------------------------
+
 # Application project
 SRCSC += $(wildcard $(APP_ROOT_DIR)/*.c)
 SRCSC += $(wildcard $(APP_ROOT_DIR)/src/*.c)
-SRCSC += $(wildcard $(APP_ROOT_DIR)/src/version/*.c)
+
 SRCSCXX += $(wildcard $(APP_ROOT_DIR)/*.cpp)
 SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/*.cpp)
-SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/version/*.cpp)
+
+ifeq ($(_COMPILE_DEFY_KEYBOARD),1)
+	SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/version/DefyFirmwareVersion.cpp)
+else ifeq ($(_COMPILE_RAISE2_KEYBOARD),1)
+	SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/version/Raise2FirmwareVersion.cpp)
+endif
 
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/Ble_composite_dev.c
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/ble_hid_service.c
@@ -320,7 +331,6 @@ SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/fds/fds.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/fstorage/nrf_fstorage.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/fstorage/nrf_fstorage_nvmc.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/fstorage/nrf_fstorage_sd.c
-SRCSC += $(wildcard $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/log/src/*.c)
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/memobj/nrf_memobj.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/strerror/nrf_strerror.c
@@ -336,6 +346,8 @@ SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/util/app_util_platform.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/util/nrf_assert.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/softdevice/common/nrf_sdh.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/softdevice/common/nrf_sdh_ble.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/external/fprintf/nrf_fprintf.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/external/fprintf/nrf_fprintf_format.c
 
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/integration/nrfx/legacy/nrf_drv_clock.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/integration/nrfx/legacy/nrf_drv_power.c
@@ -348,14 +360,30 @@ SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_spis.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_timer.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_twim.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/prs/nrfx_prs.c
-SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/hal/nrf_nvmc.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_pwm.c
 
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/hal/nrf_nvmc.c
+
+# UART communication and NRF_LOG.
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/ringbuf/nrf_ringbuf.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/integration/nrfx/legacy/nrf_drv_uart.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_uart.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/modules/nrfx/drivers/src/nrfx_uarte.c
+SRCSC += $(wildcard $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/log/src/*.c)
+
 # Kaleidoscope
-SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/bootloader_util.cpp
-SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/Hand.cpp
-SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/Focus.cpp
-SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/Defy_wireless.cpp
+ifeq ($(_COMPILE_DEFY_KEYBOARD),1)
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/bootloader_util.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/Hand.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/defy_wireless/Focus.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/Defy_wireless.cpp
+else ifeq ($(_COMPILE_RAISE2_KEYBOARD),1)
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/raise2/bootloader_util.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/raise2/Hand.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/raise2/Focus.cpp
+	SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/device/dygma/Raise2.cpp
+endif
+
 SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/key_events.cpp
 SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/layers.cpp
 SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope/plugin/DynamicMacros.cpp
@@ -380,19 +408,6 @@ SRCSCXX += $(KALEIDOSCOPE_ROOT_DIR)/src/kaleidoscope_internal/LEDModeManager.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Communications/src/device/defyN2/CommunicationsN2.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Communications/src/Communications_protocol_rf.cpp
 
-ifdef FIRMWARE_VERSION
-	DEFINES += -DFIRMWARE_VERSION=\"${FIRMWARE_VERSION}\"
-endif
-DEFINES += -DBOARD_VENDORID=0x35EF
-DEFINES += -DBOARD_PRODUCTID=0x0012
-DEFINES += -DBOARD_MANUFACTURER=\"DYGMA\"
-DEFINES += -DBOARD_PRODUCT=\"DEFY\"
-DEFINES += -DUSB_PRODUCT=\"DEFY\"
-DEFINES += -DKALEIDOSCOPE_HARDWARE_H=\"kaleidoscope/device/dygma/Defy_wireless.h\"
-DEFINES += -DKALEIDOSCOPE_LED_CONTROL_H=\<kaleidoscope/plugin/LEDControlDefy.h\>
-DEFINES += -DEEPROM_EMULATION_SIZE=8192
-
-
 # Keyboardio HID
 INCDIR += -I$(KEYBOARDIO_HID_ROOT_DIR)/src/
 SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/ConsumerControl.cpp
@@ -402,6 +417,38 @@ SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/RawHID.cpp
 SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/MultiReport/SystemControl.cpp
 SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/hidDefy.cpp
 SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/HIDReportObserver.cpp
+
+#-------------------------------------------------------------------------------
+# Main firmware defines
+#-------------------------------------------------------------------------------
+ifeq ($(_COMPILE_DEFY_KEYBOARD),1)
+	DEFINES += -DCOMPILE_DEFY_KEYBOARD=1
+else ifeq ($(_COMPILE_RAISE2_KEYBOARD),1)
+	DEFINES += -DCOMPILE_RAISE2_KEYBOARD=1
+endif
+
+ifdef FIRMWARE_VERSION
+	DEFINES += -DFIRMWARE_VERSION=\"${FIRMWARE_VERSION}\"
+endif
+
+DEFINES += -DBOARD_VENDORID=0x35EF
+DEFINES += -DBOARD_MANUFACTURER=\"DYGMA\"
+
+ifeq ($(_COMPILE_DEFY_KEYBOARD),1)
+	DEFINES += -DBOARD_PRODUCTID=0x0012
+	DEFINES += -DBOARD_PRODUCT=\"DEFY\"
+	DEFINES += -DUSB_PRODUCT=\"DEFY\"
+	DEFINES += -DKALEIDOSCOPE_HARDWARE_H=\"kaleidoscope/device/dygma/Defy_wireless.h\"
+	DEFINES += -DKALEIDOSCOPE_LED_CONTROL_H=\<kaleidoscope/plugin/LEDControlDefy.h\>
+else ifeq ($(_COMPILE_RAISE2_KEYBOARD),1)
+	DEFINES += -DBOARD_PRODUCTID=0x0021
+	DEFINES += -DBOARD_PRODUCT=\"RAISE2\"
+	DEFINES += -DUSB_PRODUCT=\"RAISE2\"
+	DEFINES += -DKALEIDOSCOPE_HARDWARE_H=\"kaleidoscope/device/dygma/Raise2.h\"
+	DEFINES += -DKALEIDOSCOPE_LED_CONTROL_H=\<kaleidoscope/plugin/LEDControlDefy.h\>
+endif
+
+DEFINES += -DEEPROM_EMULATION_SIZE=8192
 
 #-------------------------------------------------------------------------------
 # Rules
