@@ -9,11 +9,10 @@ GROUP(-lgcc -lc -lnosys)
       The softdevice and rf_host_lib are located between addresses 0 and 0x2E000 - 1 so 
       memory app starts at 0x2E000.
     
-    LENGTH = 0x49000
-      Total length of the app firmware, including the reserved pages 
-      for the Flash_storage class and excluding the softdevice + rf_host_lib.
-      The last 9 pages of flash are for the bootloader, the MBR and
-      bootloader data storage.
+    LENGTH = 0x44000
+      Total length of the app firmware, excluding the softdevice with rf_host_lib. 
+      Following are the 5 reserved pages for the Flash_storage class. The last 9 pages 
+      of flash are for the bootloader, the MBR and bootloader data storage.
 
   RAM:
     ORIGIN = 0x20009400
@@ -25,7 +24,7 @@ GROUP(-lgcc -lc -lnosys)
 */
 MEMORY
 {  
-  FLASH (rx) : ORIGIN = 0x2E000, LENGTH = 0x49000
+  FLASH (rx) : ORIGIN = 0x2E000, LENGTH = 0x44000
   RAM (rwx) :  ORIGIN = 0x20009400, LENGTH = 0x16C00    /* s140 + rf_host_lib */  
 }
 

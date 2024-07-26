@@ -2464,14 +2464,14 @@
 
 
 #ifndef NRFX_SPIS1_ENABLED
-#define NRFX_SPIS1_ENABLED 0
+#define NRFX_SPIS1_ENABLED 1
 #endif
 
 // <q> NRFX_SPIS2_ENABLED  - Enable SPIS2 instance
 
 
 #ifndef NRFX_SPIS2_ENABLED
-#define NRFX_SPIS2_ENABLED 0
+#define NRFX_SPIS2_ENABLED 1
 #endif
 
 // <o> NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
