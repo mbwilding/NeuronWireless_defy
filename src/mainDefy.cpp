@@ -391,7 +391,7 @@ static kaleidoscope::plugin::LEDStalkerDefy stalkerDefy{};
         /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
         HostPowerManagement, Battery,
         /*BLE*/
-        RadioManager, BleManager
+        RadioManager, _BleManager
     );
 #elif COMPILE_RAISE2_KEYBOARD
     KALEIDOSCOPE_INIT_PLUGINS
@@ -406,7 +406,7 @@ static kaleidoscope::plugin::LEDStalkerDefy stalkerDefy{};
         /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
         HostPowerManagement,Battery,
         /*BLE*/
-        RadioManager, BleManager
+        RadioManager, _BleManager
     );
 #endif
 // clang-format on

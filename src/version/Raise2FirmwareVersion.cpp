@@ -121,7 +121,7 @@ EventHandlerResult FirmwareVersion::onSetup()
                                                                  Runtime.storage().put(settings_base_, specifications_left_side);
                                                                  Runtime.storage().commit();
                                                                  configuration_receive.left = true;
-                                                                 BleManager::set_bt_name_from_specifications(get_specification(&specifications_left_side));
+                                                                 _BleManager.set_bt_name_from_specifications(get_specification(&specifications_left_side));
                                                                  Runtime.device().side.reset_sides();
                                                              }
                                                          }
@@ -156,7 +156,7 @@ EventHandlerResult FirmwareVersion::onSetup()
                                                                  Runtime.storage().put(settings_base_ + sizeof(specifications_left_side), specifications_right_side);
                                                                  Runtime.storage().commit();
                                                                  configuration_receive.right = true;
-                                                                 BleManager::set_bt_name_from_specifications(get_specification(&specifications_right_side));
+                                                                 _BleManager.set_bt_name_from_specifications(get_specification(&specifications_right_side));
                                                                  Runtime.device().side.reset_sides();
                                                                  //reset_mcu();
 
@@ -204,15 +204,15 @@ EventHandlerResult FirmwareVersion::onSetup()
     /*Depending on which specification side we receive, we set the BT name.
      * It's not necessary to get the two sides to set the BT with one side is sufficient. */
     if (configuration_receive.left && !conf_set){
-        BleManager::set_bt_name_from_specifications(get_specification(&specifications_left_side));
+        _BleManager.set_bt_name_from_specifications(get_specification(&specifications_left_side));
         conf_set = true;
     }
     else if (configuration_receive.right && !conf_set){
-        BleManager::set_bt_name_from_specifications(get_specification(&specifications_right_side));
+        _BleManager.set_bt_name_from_specifications(get_specification(&specifications_right_side));
     }
     else {
         const char *device_name = "Dygma";
-        BleManager::set_bt_name_from_specifications(device_name);
+        _BleManager.set_bt_name_from_specifications(device_name);
     }
 
     return EventHandlerResult::OK;
