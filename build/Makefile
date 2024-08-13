@@ -346,6 +346,7 @@ SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/util/app_util_platform.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/libraries/util/nrf_assert.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/softdevice/common/nrf_sdh.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/softdevice/common/nrf_sdh_ble.c
+SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/components/softdevice/common/nrf_sdh_soc.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/external/fprintf/nrf_fprintf.c
 SRCSC += $(SDK_NRF5_SDK_ROOT_DIR)/external/fprintf/nrf_fprintf_format.c
 
