@@ -21,8 +21,9 @@
 #include "Kaleidoscope.h"
 #include "nrf_log.h"
 
-#ifndef DEFY_FIRMWARE_VERSION
-    #define DEFY_FIRMWARE_VERSION "v0.0.0"
+#ifndef DEFY_FW_VERSION
+#error "Firmware package version is not specified."
+    #define DEFY_FW_VERSION "N/A"
 #endif
 
 namespace kaleidoscope
@@ -40,7 +41,7 @@ EventHandlerResult FirmwareVersion::onFocusEvent(const char *command)
     NRF_LOG_DEBUG("read request: version");
 
     char cstr[70];
-    strcpy(cstr, DEFY_FIRMWARE_VERSION);
+    strcpy(cstr, DEFY_FW_VERSION);
     ::Focus.sendRaw<char *>(cstr);
 
     return EventHandlerResult::EVENT_CONSUMED;
