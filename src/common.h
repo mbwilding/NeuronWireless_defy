@@ -145,5 +145,9 @@
     #define BTN_SYSTEM_OFF BTN1  /* Set the request for system OFF. */
 #endif
 
+/* Log Manager */
+
+#define DL_LOGS_ENABLED     0
+#define DL_LOGS_TYPE_FLASH  1
 
 #endif  /* __COMMON_H__ */

@@ -79,6 +79,7 @@ extern "C"
 #include "Ble_composite_dev.h"
 #include "Ble_manager.h"
 #include "Communications.h"
+#include "Log_manager.h"
 #include "Radio_manager.h"
 #include "Upgrade.h"
 #include "nrf_fstorage.h"
@@ -342,7 +343,9 @@ KALEIDOSCOPE_INIT_PLUGINS
     /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
     HostPowerManagement, Battery,
     /*BLE*/
-    RadioManager, _BleManager
+    RadioManager, _BleManager,
+    /*Log*/
+    LogManager
 );
 // clang-format on
 // End Kaleidoscope
@@ -364,6 +367,9 @@ void setup(void)
     watchdog_timer.init();
     watchdog_timer.reset();
     HID().begin();
+
+    /* Initialize the Log_manager */
+    LogManager.init();
 
 #if ENABLE_UART_DEBUG_LOG
     NRF_LOG_INIT(NULL);

@@ -192,6 +192,9 @@ INCDIR += -I$(LIB_ROOT_DIR)/UpgradeKeyscanner/src/
 INCDIR += -I$(LIB_ROOT_DIR)/CRC/
 INCDIR += -I$(LIB_ROOT_DIR)/Battery_manager/
 INCDIR += -I$(LIB_ROOT_DIR)/Ble_manager/
+INCDIR += -I$(LIB_ROOT_DIR)/Log_manager/
+INCDIR += -I$(LIB_ROOT_DIR)/Log_manager/Log_drivers/
+INCDIR += -I$(LIB_ROOT_DIR)/Log_manager/Log_drivers/Flash/
 INCDIR += -I$(LIB_ROOT_DIR)/RF_manager/
 INCDIR += -I$(LIB_ROOT_DIR)/utils/Do_once/
 INCDIR += -I$(LIB_ROOT_DIR)/utils/Run_task_once/
@@ -271,6 +274,8 @@ SRCSCXX += $(wildcard $(APP_ROOT_DIR)/src/version/DefyFirmwareVersion.cpp)
 
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/Ble_composite_dev.c
 SRCSC += $(LIB_ROOT_DIR)/Ble_composite_dev/ble_hid_service.c
+SRCSC += $(LIB_ROOT_DIR)/Log_manager/Log_drivers/Log_driver.c
+SRCSC += $(LIB_ROOT_DIR)/Log_manager/Log_drivers/Flash/flash_logger.c
 SRCSC += $(LIB_ROOT_DIR)/rf_host_device/rf_host_device_api.c
 SRCSC += $(LIB_ROOT_DIR)/Spi_slave/link/spi_link_slave.c
 SRCSC += $(LIB_ROOT_DIR)/Time_counter/Time_counter.c
@@ -305,6 +310,7 @@ SRCSCXX += $(LIB_ROOT_DIR)/UpgradeKeyscanner/src/Upgrade.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/CRC/CRC_wrapper.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Battery_manager/Battery.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/Ble_manager/Ble_manager.cpp
+SRCSCXX += $(LIB_ROOT_DIR)/Log_manager/Log_manager.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/RF_manager/Radio_manager.cpp
 SRCSCXX += $(LIB_ROOT_DIR)/utils/Timer/Timer.cpp
 
