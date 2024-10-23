@@ -438,6 +438,8 @@ DEFINES += -DKALEIDOSCOPE_LED_CONTROL_H=\<kaleidoscope/plugin/LEDControlDefy.h\>
 
 DEFINES += -DEEPROM_EMULATION_SIZE=8192
 
+DEFINES += -DBLE_DEFAULT_NAME=\"Defy BLE\"
+
 #-------------------------------------------------------------------------------
 # Rules
 #-------------------------------------------------------------------------------
