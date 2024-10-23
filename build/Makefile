@@ -414,6 +414,8 @@ SRCSCXX += $(KEYBOARDIO_HID_ROOT_DIR)/src/HIDReportObserver.cpp
 
 DEFINES += -DCOMPILE_DEFY_KEYBOARD=1
 
+DEFINES += -DDYGMA_KEYBOARD=\"Defy_wireless.h\"
+
 # Defy Neuron version
 DEFINES += -DDEFY_NEURON_FW_VERSION=\"v2.0.0-beta.6\"
 
