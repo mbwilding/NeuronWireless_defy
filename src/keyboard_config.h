@@ -1,6 +1,6 @@
 /*
  * Defy configuration file
- * This file is used to define the hardware configuration of the Raise2 keyboard.
+ * This file is used to define the hardware configuration of the Defy keyboard.
  * It is used by the Kaleidoscope firmware to configure the keyboard.
  * The configuration is used to define the number of keys, the number of LEDs, and the layout of the keyboard.
  */
