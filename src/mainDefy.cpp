@@ -53,8 +53,7 @@ extern "C"
 // #include "RaiseIdleLEDs.h"
 
 #include "DefyFirmwareVersion.h"
-#include "kaleidoscope/device/dygma/defy_wireless/Focus.h"
-// #include "kaleidoscope/device/dygma/defy_wireless/SideFlash.h"
+#include "kaleidoscope/device/dygma/KeyboardManager/universalModules/Focus.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -332,15 +331,15 @@ static kaleidoscope::plugin::LEDStalkerDefy stalkerDefy{};
 // clang-format off
 KALEIDOSCOPE_INIT_PLUGINS
 (
-    FirmwareVersion, EEPROMSettings,
-    EEPROMKeymap, FocusSettingsCommand, FocusEEPROMCommand, Upgrade, DynamicSuperKeys,
+    EEPROMSettings,
+    EEPROMKeymap, FirmwareVersion, FocusSettingsCommand, FocusEEPROMCommand, Upgrade,DynamicSuperKeys,
     LEDControl, FocusLEDCommand,
     LEDPaletteThemeDefy, ColormapEffectDefy,
     LEDRainbowWaveEffectDefy, LEDRainbowEffectDefy, stalkerDefy, solidRedDefy,
-    solidGreenDefy, solidBlueDefy, solidWhiteDefy, solidBlackDefy, batteryStatus, ledBluetoothPairingDefy,
-    IdleLEDsDefy, PersistentIdleDefyLEDs, DefyFocus, Qukeys, DynamicMacros,
+    solidGreenDefy, solidBlueDefy, solidWhiteDefy, solidBlackDefy, batteryStatus,ledBluetoothPairingDefy,
+    IdleLEDsDefy,PersistentIdleDefyLEDs, KeyboardFocus, Qukeys, DynamicMacros,
     /*SideFlash,*/ Focus, MouseKeys, OneShot, LayerFocus,
-    HostPowerManagement, Battery,
+    HostPowerManagement,Battery,
     /*BLE*/
     RadioManager, _BleManager
 );
