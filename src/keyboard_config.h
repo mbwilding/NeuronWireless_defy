@@ -7,6 +7,8 @@
 #pragma once
 #include <cstdint>
 
+#define KEYBOARD_NEURON_FW_VERSION DEFY_NEURON_FW_VERSION
+
 #define SHORT_NAME "defy_wireless"
 
 // LED definitions
