@@ -417,7 +417,7 @@ DEFINES += -DCOMPILE_DEFY_KEYBOARD=1
 DEFINES += -DDYGMA_KEYBOARD=\"Defy_wireless.h\"
 
 # Defy Neuron version
-DEFINES += -DDEFY_NEURON_FW_VERSION=\"v2.0.0-beta.6\"
+DEFINES += -DDEFY_NEURON_FW_VERSION=\"v2.0.0-beta.7\"
 
 # Defy firmware package version - Neuron + Keyscanner + RFGW
 ifdef DEFY_FW_VERSION
