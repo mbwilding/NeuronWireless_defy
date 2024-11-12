@@ -439,6 +439,8 @@ DEFINES += -DEEPROM_EMULATION_SIZE=8192
 
 DEFINES += -DBLE_DEVICE_NAME=\"Defy-BLE\"
 
+DEFINES += -DHARDWARE_VERSION_NAME=\"Defy-wireless\"
+
 #-------------------------------------------------------------------------------
 # Rules
 #-------------------------------------------------------------------------------
