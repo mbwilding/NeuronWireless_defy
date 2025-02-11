@@ -68,7 +68,7 @@ extern "C"
 #include "Kaleidoscope.h"
 // #include "RaiseIdleLEDs.h"
 
-#include "DefyFirmwareVersion.h"
+#include "FirmwareVersion.h"
 #include "kaleidoscope/device/dygma/KeyboardManager/universalModules/Focus.h"
 
 // Support for host power management (suspend & wakeup)

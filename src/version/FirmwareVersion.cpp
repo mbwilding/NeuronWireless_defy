@@ -16,7 +16,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "DefyFirmwareVersion.h"
+#include "FirmwareVersion.h"
 #include "Communications.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope.h"
