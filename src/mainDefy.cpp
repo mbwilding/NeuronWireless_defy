@@ -387,6 +387,9 @@ void setup(void)
     NRF_LOG_INFO("Initializing...");
     NRF_LOG_FLUSH();
 
+    // Initialize the communications before Kaleidoscope to make sure the correct order of the incoming message processing
+    Communications.init();
+
     // Kaleidoscope
     Kaleidoscope.setup();
     EEPROMKeymap.setup(10);            // Reserve space in the keyboard's EEPROM(flash memory) for the keymaps.
@@ -397,7 +400,6 @@ void setup(void)
 
     // Keep the HID begin after the Kaleidoscope setup.
     HID().begin();
-    Communications.init();
 }
 
 void loop()
