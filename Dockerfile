@@ -4,14 +4,10 @@ FROM ubuntu:jammy
 ARG BUILD_TYPE=release
 
 # Environment variables
-ENV DEBIAN_FRONTEND=noninteractive \
-    LIBRARY_SDK_PATH="libraries/SDK" \
-    NORDIC_SDK_PATH="nRF5_SDK_17.1.0_ddde560" \
-    NORDIC_SDK_ZIP="nRF5_SDK_17.1.0_ddde560.zip" \
-    NORDIC_SDK_URL="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip"
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install prerequisites
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update && apt-get install \
     build-essential \
     wget \
     make \
@@ -30,10 +26,15 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 RUN pip3 install intelhex
 
 # Download and setup Nordic SDK
-RUN mkdir -p ${LIBRARY_SDK_PATH} && cd ${LIBRARY_SDK_PATH} && \
-    wget -O ${NORDIC_SDK_ZIP} ${NORDIC_SDK_URL} && \
-    unzip ${NORDIC_SDK_ZIP} && \
-    rm ${NORDIC_SDK_ZIP}
+RUN library_sdk_path="libraries/SDK" \
+    nordic_sdk_version="17.1.0_ddde560" \
+    nordic_sdk_path="nRF5_SDK_${nordic_sdk_version}" \
+    nordic_sdk_zip="nRF5_SDK_${nordic_sdk_version}.zip" \
+    nordic_sdk_urL="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_${nordic_sdk_version}.zip" \
+    mkdir -p ${library_sdk_path} && cd ${library_sdk_path} && \
+    wget -O ${nordic_sdk_zip} ${nordic_sdk_url} && \
+    unzip ${nordic_sdk_zip} && \
+    rm ${nordic_sdk_zip}
 
 # Copy the project files into the container
 WORKDIR /code
