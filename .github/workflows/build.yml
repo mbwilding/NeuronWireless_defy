@@ -29,7 +29,7 @@ jobs:
           sudo update-alternatives --set python3 /usr/bin/python3.11
           sudo pip install intelhex
 
-      - name: Verify Pre-requisites
+      - name: Verify Pre-requisites Versions
         run: |
           set -e
           echo "make: $(make --version | head -n 1)"
@@ -40,7 +40,7 @@ jobs:
         env:
           library_sdk_path: libraries/SDK
           nordic_sdk_path: nRF5_SDK_17.1.0_ddde560
-          nordic_sdk_zip: "${nordic_sdk_path}.zip"
+          nordic_sdk_zip: ${nordic_sdk_path}.zip
           nordic_sdk_url: https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip
         run: |
           mkdir -p ${library_sdk_path}
