@@ -30,11 +30,9 @@ RUN library_sdk_path="libraries/SDK" && \
     unzip ${nordic_sdk_zip} && \
     rm ${nordic_sdk_zip}
 
-# Copy the project files into the container
+# Copy the project files into the container and set the working directory to the build directory
 WORKDIR /code
 COPY . .
-
-# Build the project with the specified build type
 WORKDIR /code/build
 
 # Build
