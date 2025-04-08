@@ -23,11 +23,11 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 RUN pip3 install intelhex
 
 # Download and setup Nordic SDK
-RUN library_sdk_path="libraries/SDK" \
-    nordic_sdk_version="17.1.0_ddde560" \
-    nordic_sdk_path="nRF5_SDK_${nordic_sdk_version}" \
-    nordic_sdk_zip="nRF5_SDK_${nordic_sdk_version}.zip" \
-    nordic_sdk_urL="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_${nordic_sdk_version}.zip" \
+RUN library_sdk_path="libraries/SDK" && \
+    nordic_sdk_version="17.1.0_ddde560" && \
+    nordic_sdk_path="nRF5_SDK_${nordic_sdk_version}" && \
+    nordic_sdk_zip="nRF5_SDK_${nordic_sdk_version}.zip" && \
+    nordic_sdk_url="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_${nordic_sdk_version}.zip" && \
     mkdir -p ${library_sdk_path} && cd ${library_sdk_path} && \
     wget -O ${nordic_sdk_zip} ${nordic_sdk_url} && \
     unzip ${nordic_sdk_zip} && \
