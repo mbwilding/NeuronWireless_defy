@@ -14,18 +14,19 @@ jobs:
           fetch-depth: 1
           submodules: recursive
 
-      - name: Pre-requisites
+      - name: Install Pre-requisites
         run: |
-          sudo apt-get install -y make wget python3 gcc-arm-none-eabi
+          sudo apt-get install -y build-essential make wget python3 gcc-arm-none-eabi
           sudo pip install intelhex
 
       - name: Verify Pre-requisites
         run: |
           echo "make: $(make --version | head -n 1)"
-          echo "gcc-arm-none-eabi version: $(arm-none-eabi-gcc --version | head -n 1)"
+          echo "gcc-arm-none-eabi: $(arm-none-eabi-gcc --version | head -n 1)"
           echo "python: $(python3 --version)"
+          echo "intelhex: $(intelhex --version)"
 
-      - name: Nordic SDK
+      - name: Setup Nordic SDK
         env:
           sdk_path: "libraries/SDK"
           nordic_sdk_file: "nRF5_SDK_17.1.0_ddde560.zip"
