@@ -3,11 +3,8 @@ FROM ubuntu:jammy
 # Build type argument: release or debug (default: release)
 ARG BUILD_TYPE=release
 
-# Environment variables
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Install prerequisites
-RUN apt-get update && apt-get install \
+RUN apt-get update -y && apt-get install -y \
     build-essential \
     wget \
     make \
