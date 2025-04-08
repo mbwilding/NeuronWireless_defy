@@ -16,26 +16,24 @@ jobs:
 
       - name: Install Pre-requisites
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y software-properties-common
+          set -e
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt-get update -y
-          # sudo apt-get remove -y python3
           sudo apt-get install -y \
             build-essential \
             wget \
             make=4.3-4.1build2 \
-            python3.11
-            # gcc-arm-none-eabi
-            # gcc-arm-none-eabi=10:10.3.0-1
+            python3.11 \
+            gcc-arm-none-eabi=10:10.3.0-1
           sudo pip install intelhex
+          sudo update-alternatives --set python3 /usr/bin/python3.11
 
       - name: Verify Pre-requisites
         run: |
+          set -e
           echo "make: $(make --version | head -n 1)"
           echo "gcc-arm-none-eabi: $(arm-none-eabi-gcc --version | head -n 1)"
           echo "python: $(python3 --version)"
-          echo "intelhex: $(python3 -c 'import intelhex; print(intelhex.__version__)')"
 
       # - name: Setup Nordic SDK
       #   env:
