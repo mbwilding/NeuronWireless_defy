@@ -21,7 +21,7 @@ jobs:
             wget \
             make=4.3-4.1build2 \
             python3 \
-            gcc-arm-none-eabi
+            gcc-arm-none-eabi=10.3
           sudo pip install intelhex
 
       - name: Verify Pre-requisites
