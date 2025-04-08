@@ -16,7 +16,12 @@ jobs:
 
       - name: Install Pre-requisites
         run: |
-          sudo apt-get install -y build-essential make=4.3 wget python3 gcc-arm-none-eabi
+          sudo apt-get install -y \
+            build-essential \
+            wget \
+            make=4.3-4.1build2 \
+            python3 \
+            gcc-arm-none-eabi
           sudo pip install intelhex
 
       - name: Verify Pre-requisites
