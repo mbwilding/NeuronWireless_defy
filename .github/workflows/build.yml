@@ -43,8 +43,8 @@ jobs:
 
       - name: Pre-requisites
         run: |
-          apt install make wget python3 gcc-arm-none-eabi
-          pip install intelhex
+          sudo apt install make wget python3 gcc-arm-none-eabi
+          sudo pip install intelhex
 
       - name: Download SDK
         env:
