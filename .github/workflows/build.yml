@@ -1,0 +1,60 @@
+#
+# ## Requirements
+# * `make 4.3`
+# * `gcc-arm-none-eabi 10.3`
+# * `python 3.11`
+# * `IntelHex` Python library
+#
+# To cover these requirements in Ubuntu based distributions, install the `build-essential` package. For other Linux distros install them independently.
+#
+# Install the toolchain for the arm chips
+#
+# ```sudo apt install gcc-arm-none-eabi```
+#
+# For installing the `IntelHex` call
+#
+# ```sudo pip install intelhex```
+#
+# ## Preparations
+#
+# * Clone this repository on your local drive
+# * Update submodules `git submodule update --init --recursive`
+# * Download the Nordic Semiconductor SDK [nrf5_sdk_17.1.0_ddde560](https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip)
+# * Unpack the `nrf5_sdk_17.1.0_ddde560` into the `libraries/SDK/nRF5_SDK_17.1.0_ddde560` folder
+#
+# ## Build
+#
+# `cd NeuronWireless_defy/build`
+#
+# `make release` or `make debug`
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pre-requisites
+        run: |
+          apt install make wget python3 gcc-arm-none-eabi
+          pip install intelhex
+
+      - name: Download SDK
+        env:
+          sdk_path: "libraries/SDK"
+          nordic_sdk_file: "nRF5_SDK_17.1.0_ddde560.zip"
+          nordic_sdk_url: "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip"
+        run: |
+          mkdir -p ${sdk_path}
+          pushd ${sdk_path}
+          wget -O ${nordic_sdk_file} ${nordic_sdk_url}
+          unzip ${nordic_sdk_file}
+          rm ${nordic_sdk_file}
+          popd
