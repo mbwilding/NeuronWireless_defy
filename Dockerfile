@@ -1,8 +1,5 @@
 FROM ubuntu:jammy
 
-# Build type argument: release or debug (default: release)
-ARG BUILD_TYPE=release
-
 # Install prerequisites
 RUN apt-get update -y && apt-get install -y \
     build-essential \
@@ -39,4 +36,9 @@ COPY . .
 
 # Build the project with the specified build type
 WORKDIR /code/build
+
+# Build type argument: release or debug (default: release)
+ARG BUILD_TYPE=release
+
+# Build
 RUN make ${BUILD_TYPE}
