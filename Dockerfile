@@ -35,7 +35,6 @@ RUN mkdir -p ${LIBRARY_SDK_PATH} && cd ${LIBRARY_SDK_PATH} && \
     unzip ${NORDIC_SDK_ZIP} && \
     rm ${NORDIC_SDK_ZIP}
 
-
 # Copy the project files into the container
 WORKDIR /code
 COPY . .
