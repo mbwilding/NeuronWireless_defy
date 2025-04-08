@@ -30,11 +30,6 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 # Install intelhex
 RUN pip3 install intelhex
 
-# Verify tool versions
-RUN echo "make: $(make --version | head -n 1)" && \
-    echo "gcc-arm-none-eabi: $(arm-none-eabi-gcc --version | head -n 1)" && \
-    python3 --version
-
 # Download and setup Nordic SDK
 RUN mkdir -p ${LIBRARY_SDK_PATH} && cd ${LIBRARY_SDK_PATH} && \
     wget -O ${NORDIC_SDK_ZIP} ${NORDIC_SDK_URL} && \
