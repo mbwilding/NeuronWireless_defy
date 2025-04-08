@@ -16,8 +16,11 @@ jobs:
           submodules: recursive
 
       - name: Docker Build
+        env:
+          TAG: defy-wireless
+          BUILD_TYPE: release
         run: |
           docker build \
-            --build-arg BUILD_TYPE=release \
-            -t defy \
+            --build-arg BUILD_TYPE=${BUILD_TYPE} \
+            -t ${TAG} \
             .
