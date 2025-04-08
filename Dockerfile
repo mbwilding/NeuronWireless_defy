@@ -29,8 +29,8 @@ RUN library_sdk_path="libraries/SDK" && \
     nordic_sdk_zip="nRF5_SDK_${nordic_sdk_version}.zip" && \
     nordic_sdk_url="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_${nordic_sdk_version}.zip" && \
     mkdir -p ${library_sdk_path} && cd ${library_sdk_path} && \
-    wget -O ${nordic_sdk_zip} ${nordic_sdk_url} && \
-    unzip ${nordic_sdk_zip} && \
+    wget -q -O ${nordic_sdk_zip} ${nordic_sdk_url} && \
+    unzip -q ${nordic_sdk_zip} && \
     rm ${nordic_sdk_zip}
 
 # Copy the project files into the container
