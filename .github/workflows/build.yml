@@ -49,15 +49,21 @@ jobs:
           sudo apt install make wget python3 gcc-arm-none-eabi
           sudo pip install intelhex
 
-      - name: Download SDK
+      - name: Nordic SDK
         env:
           sdk_path: "libraries/SDK"
           nordic_sdk_file: "nRF5_SDK_17.1.0_ddde560.zip"
           nordic_sdk_url: "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip"
         run: |
           mkdir -p ${sdk_path}
-          pushd ${sdk_path}
+          cd ${sdk_path}
+          # pushd ${sdk_path}
           wget -O ${nordic_sdk_file} ${nordic_sdk_url}
           unzip ${nordic_sdk_file}
           rm ${nordic_sdk_file}
-          popd
+          # popd
+
+      - name: Build
+        run: |
+          cd build
+          make release
