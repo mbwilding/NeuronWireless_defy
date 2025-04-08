@@ -10,12 +10,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NORDIC_SDK_ZIP="nRF5_SDK_17.1.0_ddde560.zip" \
     NORDIC_SDK_URL="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip"
 
-# Download and setup Nordic SDK
-RUN mkdir -p ${LIBRARY_SDK_PATH} && cd ${LIBRARY_SDK_PATH} && \
-    wget -O ${NORDIC_SDK_ZIP} ${NORDIC_SDK_URL} && \
-    unzip ${NORDIC_SDK_ZIP} && \
-    rm ${NORDIC_SDK_ZIP}
-
 # Install prerequisites
 RUN apt-get update -y && apt-get install -y \
     build-essential \
@@ -34,6 +28,12 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
 # Install intelhex
 RUN pip3 install intelhex
+
+# Download and setup Nordic SDK
+RUN mkdir -p ${LIBRARY_SDK_PATH} && cd ${LIBRARY_SDK_PATH} && \
+    wget -O ${NORDIC_SDK_ZIP} ${NORDIC_SDK_URL} && \
+    unzip ${NORDIC_SDK_ZIP} && \
+    rm ${NORDIC_SDK_ZIP}
 
 # Copy the project files into the container
 COPY . .
