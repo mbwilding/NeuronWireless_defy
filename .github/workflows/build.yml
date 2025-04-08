@@ -21,19 +21,13 @@ jobs:
             build-essential \
             wget \
             make \
-            python3 \
             gcc-arm-none-eabi
-          # sudo add-apt-repository ppa:deadsnakes/ppa
-          # sudo apt-get update -y
-          # sudo apt-get install -y \
-          #   build-essential \
-          #   wget \
-          #   make=4.3-4.1build2 \
-          #   python3.11 \
-          #   gcc-arm-none-eabi=15:10.3-2021.07-4
-          # sudo pip install intelhex
-          # sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
-          # sudo update-alternatives --set python3 /usr/bin/python3.11
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt-get update -y
+          sudo apt-get install -y python3.11
+          sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+          sudo update-alternatives --set python3 /usr/bin/python3.11
+          sudo pip install intelhex
 
       - name: Verify Pre-requisites
         run: |
