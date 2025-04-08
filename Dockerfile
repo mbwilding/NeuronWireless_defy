@@ -37,8 +37,6 @@ COPY . .
 # Build the project with the specified build type
 WORKDIR /code/build
 
-# Build type argument: release or debug (default: release)
-ARG BUILD_TYPE=release
-
 # Build
+ARG BUILD_TYPE=release
 RUN make ${BUILD_TYPE}
