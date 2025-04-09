@@ -1,16 +1,13 @@
 name: Build
 
 on:
-  # TODO: Disable push
-  push:
+  pull_request:
     branches:
       - main
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
       inputs:
         version:
-          description: 'FMW version'
+          description: Firmware Version
           required: true
           type: string
 
@@ -20,14 +17,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository and submodules
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - uses: ./.github/actions/setup
+      - name: Setup Dependencies
+        uses: ./.github/actions/setup
 
       - name: Get Nordic SDK
         run: |
