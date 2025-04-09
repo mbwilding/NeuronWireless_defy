@@ -1,0 +1,16 @@
+name: Nordic SDK
+description: |
+  This action downloads and unzips the Nordic SDK.
+  It is used in the build process to set up the environment.
+  The action is a composite action that runs a shell command to download and unzip the SDK.
+  The SDK is required for building the firmware.
+
+runs:
+  using: composite
+  steps:
+    - name: Get Nordic SDK
+      shell: bash
+      run: |
+        mkdir -p libraries/SDK
+        wget https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/nrf5_sdk_17.1.0_ddde560.zip
+        unzip nrf5_sdk_17.1.0_ddde560.zip -d libraries/SDK
