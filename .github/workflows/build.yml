@@ -5,10 +5,10 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
       inputs:
-      version:
-        description: 'FMW version'
-        required: true
-        type: string
+        version:
+          description: 'FMW version'
+          required: true
+          type: string
 
 env:
   FIRMWARE_VERSION: ${{ github.event.inputs.version }}
